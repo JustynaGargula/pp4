@@ -24,8 +24,27 @@ procedura("Aneta posiada chomika")
 f.close()
 
 # podpunkt 4
+class Student:
+    def __init__(self, imie, nazwisko):
+        self.imie = imie
+        self.nazwisko = nazwisko
+    def __str__(self):
+        return self.imie+" "+self.nazwisko
+
 class Zajecia:
     def __init__(self):
         self.studenci = []
-    def zapisz_Studenta():
-        ...
+
+    def zapisz_Studenta(self, student):
+        if len(self.studenci)>=10:
+            print("Brak miejsc na tych zajeciach.")
+        else:
+            self.studenci.append(student)
+            print("Zapisano studenta: "+student.__str__())
+
+
+z = Zajecia()
+s1 = Student("Anna", "Lewandowska")
+z.zapisz_Studenta(s1)
+s2 = Student("Alicja", "Nowak")
+z.zapisz_Studenta(s2)
