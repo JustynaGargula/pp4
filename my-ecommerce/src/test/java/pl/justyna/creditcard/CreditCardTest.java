@@ -1,6 +1,9 @@
 package pl.justyna.creditcard;
 
 import org.junit.jupiter.api.Test;
+import pl.justyna.creditcard.CreditCard;
+import pl.justyna.creditcard.CreditLimitBelowCertainThresholdException;
+
 import static org.junit.jupiter.api.Assertions.*;
 import java.math.BigDecimal;
 
@@ -31,10 +34,10 @@ public class CreditCardTest {
 
     @Test
     void itCanAssignLimitBelowCertainThreshold(){
-        CreditCard card1 = new CreditCard("1234-4567");
+        CreditCard card = new CreditCard("1234-4567");
 
         try{
-            card1.assignCredit(BigDecimal.valueOf(10));
+            card.assignCredit(BigDecimal.valueOf(10));
             fail("Should throw exception");
 
         } catch (CreditLimitBelowCertainThresholdException e){
