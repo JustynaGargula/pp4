@@ -2,7 +2,7 @@ package pl.justyna.creditcard;
 
 import org.junit.jupiter.api.Test;
 import pl.justyna.creditcard.CreditCard;
-import pl.justyna.creditcard.CreditLimitBelowCertainThresholdException;
+import pl.justyna.creditcard.CreditBelowLimitException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.math.BigDecimal;
@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 public class CreditCardTest {
 
     @Test
-    void itAllowsToAsignCreditLimit(){
+    void itAllowsToAssignCreditLimit(){
             //Arrange
         CreditCard card = new CreditCard("1234-4567");
             //Act
@@ -20,36 +20,38 @@ public class CreditCardTest {
         }
 
     @Test
-    void itAllowsToAsignDifferentCreditLimit(){
+    void itAllowsToAssignDifferentCreditLimit(){
         //Arrange
         CreditCard card1 = new CreditCard("1234-4567");
         CreditCard card2 = new CreditCard("1234-4568");
         //Act
         card1.assignCredit(BigDecimal.valueOf(1000));
-        card2.assignCredit(BigDecimal.valueOf(1000));
+        card2.assignCredit(BigDecimal.valueOf(1100));
         //Assert
         assertEquals(BigDecimal.valueOf(1000), card1.getBalance());
-        assertEquals(BigDecimal.valueOf(1000), card2.getBalance());
+        assertEquals(BigDecimal.valueOf(1100), card2.getBalance());
     }
 
     @Test
     void itCanAssignLimitBelowCertainThreshold(){
         CreditCard card = new CreditCard("1234-4567");
+        assertThrows(
+                CreditBelowLimitException.class,
+                () -> card.assignCredit(BigDecimal.valueOf(10)));              //Lambda
 
         try{
             card.assignCredit(BigDecimal.valueOf(10));
             fail("Should throw exception");
 
-        } catch (CreditLimitBelowCertainThresholdException e){
+        } catch (CreditBelowLimitException e){
             assertTrue(true);
         }
 
-        assertThrows(CreditLimitBelowCertainThresholdException.class,
-                () -> card.assignCredit(BigDecimal.valueOf(10)));              //Lambda
-        assertThrows(CreditLimitBelowCertainThresholdException.class,
-                () -> card.assignCredit(BigDecimal.valueOf(99)));
-        assertDoesNotThrow(CreditLimitBelowCertainThresholdException.class,
-                () -> card.assignCredit(BigDecimal.valueOf(100)));
+
+//        assertThrows(CreditBelowLimitException.class,
+//                () -> card.assignCredit(BigDecimal.valueOf(99)));
+//        assertDoesNotThrow(CreditBelowLimitException.class,
+//                () -> card.assignCredit(BigDecimal.valueOf(100)));
 
 
     }

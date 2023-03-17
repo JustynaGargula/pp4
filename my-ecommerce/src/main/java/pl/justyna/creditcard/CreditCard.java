@@ -10,8 +10,8 @@ public class CreditCard {
     }
 
     public void assignCredit(BigDecimal creditAmount) {
-        if ( creditAmount.compareTo(BigDecimal.valueOf(100)) < 0) {          //isBelowThereshold - funkcja zmienic
-            throw new CreditLimitBelowCertainThresholdException();
+        if (creditAmount.compareTo(BigDecimal.valueOf(100)) < 0) {          //isBelowThereshold - funkcja zmienic
+            throw new CreditBelowLimitException();
         }
 
         this.balance = creditAmount;
@@ -19,6 +19,7 @@ public class CreditCard {
     }
 
     public BigDecimal getBalance() {
+
         return balance;
     }
 }

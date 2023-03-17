@@ -13,7 +13,7 @@ public class FirstTest {
     void my2ndTest(){
         String name = "justyna";
         String hello = String.format("Hello %s", name);
-        assrt hello equals("Hello justyna");
+        assert hello.equals("Hello justyna");
     }
 
     @Test
