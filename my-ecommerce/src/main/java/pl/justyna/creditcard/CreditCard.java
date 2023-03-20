@@ -9,7 +9,7 @@ public class CreditCard {
 
     }
 
-    public void assignCredit(BigDecimal creditAmount) {
+    public void assignCredit(BigDecimal creditAmount) {                 //ustawiamy saldo konta - nie moze byc ujemne
         if (creditAmount.compareTo(BigDecimal.valueOf(100)) < 0) {          //isBelowThereshold - funkcja zmienic
             throw new CreditBelowLimitException();
         }
