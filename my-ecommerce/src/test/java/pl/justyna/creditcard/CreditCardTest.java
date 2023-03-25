@@ -73,9 +73,9 @@ public class CreditCardTest {
         CreditCard card = new CreditCard("1234-5678");
         card.assignCredit(BigDecimal.valueOf(1000));
         //Act
-        card.withdraw(BigDecimal.valueOf(100));
+        card.withdraw(BigDecimal.valueOf(800));
         ///Assert
-        assertEquals(BigDecimal.valueOf(900), card.getBalance());
+        assertEquals(BigDecimal.valueOf(200), card.getBalance());
     }
 
 
@@ -89,6 +89,6 @@ public class CreditCardTest {
 
         float y1 = 0.01f;
         float y2 = 0.03f;
-        float yresult = y2-y1;
+        float yResult = y2-y1;
             }
         }

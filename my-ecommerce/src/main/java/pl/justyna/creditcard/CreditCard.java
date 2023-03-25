@@ -5,17 +5,19 @@ import java.math.BigDecimal;
 public class CreditCard {
     private BigDecimal balance;
     private BigDecimal credit;
+
+    private int withdrawals = 0;
     public CreditCard(String cardNumber){
 
     }
 
     public void assignCredit(BigDecimal creditAmount) {                 //ustawiamy wysokosc kredytu
-        if (isBelowThreshold(creditAmount)) {
+        if (isBelowThreshold(creditAmount)) {                           // threshold - granica
             throw new CreditBelowLimitException();
         }
 
         if (credit != null){
-            throw new CantAssignCreditTwiceException();
+            throw new CantAssignCreditTwiceException();                 //nie mozna dwa razy przypisac kredytu
         }
 
         this.balance = creditAmount;
@@ -23,19 +25,27 @@ public class CreditCard {
 
     }
 
-    private static boolean isBelowThreshold(BigDecimal creditAmount){
+    private static boolean isBelowThreshold(BigDecimal creditAmount){       //sprawdza czy ustawiany kredyt jest < 100
         return creditAmount.compareTo(BigDecimal.valueOf(100)) < 0;
     }
 
     public BigDecimal getBalance() {
-
         return balance;
     }
 
     public void withdraw(BigDecimal withdrawAmount) {
-        this.balance = balance.substract(withdrawAmount);
-//        if (withdrawAmount.compareTo(credit) < 0){      //<0 ? czy inaczej - sprawdzic
-//            String works = "works";                     //przykladowe cos
-//        }
+
+        if (withdrawAmount.compareTo(credit) > 0){      //jeśli kwota do wziecia > limitu kredytu
+            throw new WithdrawalOverLimit();
+        }
+        if (withdrawAmount.compareTo(balance) > 0){
+            throw new NotEnoughMoney();
+        }
+        if(withdrawals >= 10){
+            throw new AlreadyWithdrawn10Times();
+        }
+
+        this.balance = balance.subtract(withdrawAmount);
+        withdrawals++;
     }
 }
