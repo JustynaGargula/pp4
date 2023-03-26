@@ -16,7 +16,7 @@ public class CreditCardTest {
             //Act
         card.assignCredit(BigDecimal.valueOf(1000));
             //Assert
-        assertEquals(BigDecimal.valueOf(1000), card.getBalance());
+        assertEquals(BigDecimal.valueOf(1000), card.getBalance());              //sprawdza, czy balance (actual) to 1000 (expected)
         }
 
     @Test
@@ -57,7 +57,7 @@ public class CreditCardTest {
     }
 
     @Test
-    void itDenyAssignLimitTwice(){
+    void itDeniesAssignLimitTwice(){
         CreditCard card = new CreditCard("1234-5678");
         card.assignCredit(BigDecimal.valueOf(1000));
 
@@ -68,7 +68,7 @@ public class CreditCardTest {
     }
 
     @Test
-    void itAllowWithdraw() {
+    void itAllowsToWithdraw() {
         //Arrange
         CreditCard card = new CreditCard("1234-5678");
         card.assignCredit(BigDecimal.valueOf(1000));
@@ -78,7 +78,54 @@ public class CreditCardTest {
         assertEquals(BigDecimal.valueOf(200), card.getBalance());
     }
 
+    @Test
+    void itDeniesWithdrawalOverLimit(){
+        CreditCard card = new CreditCard("1234-5678");
+        card.assignCredit(BigDecimal.valueOf(1000));
 
+        assertThrows(
+                WithdrawalOverLimitException.class,
+                () -> card.withdraw(BigDecimal.valueOf(2000))
+        );
+    }
+
+    @Test
+    void itDeniesWithdrawalWhenNotEnoughMoney(){
+        CreditCard card = new CreditCard("1234-5678");
+        card.assignCredit(BigDecimal.valueOf(1000));
+        card.withdraw(BigDecimal.valueOf(800));
+
+        assertThrows(
+                NotEnoughMoneyException.class,
+                () -> card.withdraw(BigDecimal.valueOf(300))
+        );
+    }
+
+    @Test
+    void itDeniesWithdrawalMoreThan10Times(){
+        CreditCard card = new CreditCard("1234-5678");
+        card.assignCredit(BigDecimal.valueOf(1000));
+        for(int i=0; i<10; i++){
+            card.withdraw(BigDecimal.valueOf(50));
+        }
+
+        assertThrows(
+                AlreadyWithdrawn10TimesException.class,
+                () -> card.withdraw(BigDecimal.valueOf(50))
+        );
+    }
+
+
+    @Test
+    void itAllowsToRepay(){
+        CreditCard card = new CreditCard("1234-5678");
+        card.assignCredit(BigDecimal.valueOf(1000));
+
+        card.withdraw(BigDecimal.valueOf(400));
+        card.repay(BigDecimal.valueOf(100));
+
+        assertEquals(BigDecimal.valueOf(300), card.getDebt());
+    }
 
 
     @Test

@@ -7,6 +7,9 @@ public class CreditCard {
     private BigDecimal credit;
 
     private int withdrawals = 0;
+
+    private BigDecimal debt = BigDecimal.valueOf(0);
+
     public CreditCard(String cardNumber){
 
     }
@@ -36,16 +39,25 @@ public class CreditCard {
     public void withdraw(BigDecimal withdrawAmount) {
 
         if (withdrawAmount.compareTo(credit) > 0){      //jeśli kwota do wziecia > limitu kredytu
-            throw new WithdrawalOverLimit();
+            throw new WithdrawalOverLimitException();
         }
         if (withdrawAmount.compareTo(balance) > 0){
-            throw new NotEnoughMoney();
+            throw new NotEnoughMoneyException();
         }
         if(withdrawals >= 10){
-            throw new AlreadyWithdrawn10Times();
+            throw new AlreadyWithdrawn10TimesException();
         }
 
         this.balance = balance.subtract(withdrawAmount);
         withdrawals++;
+        debt = debt.add(withdrawAmount);
+    }
+
+    public void repay(BigDecimal repayAmount){             // zakladam, ze splacic mozna kwote wyplacona, zmienna debt
+        debt = debt.subtract(repayAmount);
+    }
+
+    public BigDecimal getDebt() {
+        return debt;
     }
 }
