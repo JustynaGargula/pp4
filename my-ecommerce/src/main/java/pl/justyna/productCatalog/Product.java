@@ -1,5 +1,6 @@
 package pl.justyna.productCatalog;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 public class Product {
@@ -14,6 +15,13 @@ public class Product {
     }
 
     public String getID() {
-        return uuid;                //co?
+        return uuid;
+    }
+
+    public BigDecimal getPrice() {
+    }
+
+    public static boolean isOnline(Product product) {
+        return online;
     }
 }
