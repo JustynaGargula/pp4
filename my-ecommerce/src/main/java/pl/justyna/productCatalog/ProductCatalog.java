@@ -1,5 +1,7 @@
 package pl.justyna.productCatalog;
 
+import jdk.internal.access.JavaIOFileDescriptorAccess;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,9 +15,9 @@ public class ProductCatalog {
     //Biznes
     //wycielismy problem, schowalismy w innej klasie, tam techniczne rzeczy sie meczymy
     //do testowania robimy fake symulator - beedziemy tak robic
-    //mozna tez robic wwersje demo - dzialana przykladzie
-    //Tech
-    HashMapProductStorage productStorage;
+    //mozna tez robic wersje demo - dziala na przykladzie
+    //Technical
+    private ProductStorage productStorage;
 
     public ProductCatalog(){
 
@@ -37,38 +39,35 @@ public class ProductCatalog {
 
     }
 
-    public List<Product> allPublishedProducts(){
-        return products.values()
-                .stream()
-                .filter(Product::isOnline)
-                .collect(Collectors.toList());
-    }
-
     public Product loadById(String productID) {
-        return products.get(productID);
+        return productStorage.loadById(productID);
     }
 
-    public void changePrice(String productID, BigDecimal valueOf) {
-        Product loaded = this.loadById(productID);
-        loaded.changePrice(newPrice);
+    public void changePrice(String productID, BigDecimal newPrice) {
+        Product loadedProduct = this.loadById(productID);
+        loadedProduct.changePrice(newPrice);
     }
 
-    public void assignImage(String productId, String s) {
-        loaded = this.loadById(productId);
-        getImageKey(imageKey);
+    public void assignImage(String productId, String imageKey) {
+        Product product = this.loadById(productId);
+        product.setImageKey(imageKey);
     }
 
-    public void publish(String productId) {
-        Product loaded = this.loadById(productId);
+    public void publishProduct(String productId) {
+        Product product = loadById(productId);
 
-        if(loaded.getPrice() == null) {
+        if (product.getImage() == null) {
             throw new ProductCantBePublishedException();
         }
 
-        if(loaded.getImageKey() == null) {
+        if (product.getPrice() == null) {
             throw new ProductCantBePublishedException();
         }
 
-        loaded.setOnline();
+        product.setOnline(true);
+    }
+
+    public List<Product> allPublishedProducts() {
+        return productStorage.allPublishedProducts();
     }
 }
