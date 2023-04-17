@@ -1,29 +1,24 @@
 package pl.justyna;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import pl.justyna.productCatalog.HashMapProductStorage;
+import pl.justyna.productCatalog.ProductCatalog;
+import pl.justyna.productCatalog.ProductStorage;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+@SpringBootApplication
 public class Main {
     public static void main(String[] args) {
+        SpringApplication.run(Main.class, args);
 
-        List<String> names = Arrays.asList("Jakub", "Michal",
-                "Agnieszka", "Ola", "Kasia");
-        Greeter greeter = new Greeter();
-        greeter.greet("Jakub"); // -> Hello Jakub
-
-        List<String> ladies = new ArrayList<String>();
-        for (String name : names) {
-            if (name.endsWith("a")) {
-                ladies.add(name);
-            }
+        @Bean
+        ProductCatalog createMyProductCatalog() {
+            return new ProductCatalog(new HashMapProductStorage());
         }
-        for (String ladyName: ladies) {
-            greeter.greet(ladyName);
-        }
-
-        names.stream()
-                .filter(name -> name.endsWith("a")) // python way lambda name: name[-1] == "a"
-                .forEach(greeter::greet);
 
     }
 }
