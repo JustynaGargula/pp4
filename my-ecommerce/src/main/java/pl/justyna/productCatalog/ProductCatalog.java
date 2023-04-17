@@ -1,6 +1,6 @@
 package pl.justyna.productCatalog;
 
-import jdk.internal.access.JavaIOFileDescriptorAccess;
+// import jdk.internal.access.JavaIOFileDescriptorAccess;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class ProductCatalog {
     //do testowania robimy fake symulator - beedziemy tak robic
     //mozna tez robic wersje demo - dziala na przykladzie
     //Technical
-    private ProductStorage productStorage;
+    private HashMapProductStorage productStorage;
 
     public ProductCatalog(){
 
@@ -56,7 +56,7 @@ public class ProductCatalog {
     public void publishProduct(String productId) {
         Product product = loadById(productId);
 
-        if (product.getImage() == null) {
+        if (product.getImageKey() == null) {
             throw new ProductCantBePublishedException();
         }
 

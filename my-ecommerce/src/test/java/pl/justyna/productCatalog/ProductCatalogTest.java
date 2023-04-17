@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.ArrayList;
 
 public class ProductCatalogTest{
 
@@ -13,10 +14,11 @@ public class ProductCatalogTest{
         ProductCatalog catalog = thereIsProductCatalog();
         List<Product> products = catalog.allProducts();
         assertEmptyList(products);
+
     }
 
     @Test
-    void publishedProductsAreEmptyForNewCatalog(){     //wnetrze??
+    void publishedProductsAreEmptyForNewCatalog(){
         ProductCatalog catalog = thereIsProductCatalog();
         List<Product> products = catalog.allProducts();
         assertEmptyList(products);
@@ -47,7 +49,7 @@ public class ProductCatalogTest{
         String productID = catalog.addProduct("lego 1234", "nice one");
 
         Product loadedProduct = catalog.loadById(productID);
-        assert productID.equals(loadedProduct);
+        assert productID.equals(loadedProduct.getID());
         assert loadedProduct.getName().equals("lego 1234");
     }
 
@@ -68,10 +70,10 @@ public class ProductCatalogTest{
         ProductCatalog catalog = thereIsProductCatalog();
         String productId = catalog.addProduct("lego 1234", "nice one");
 
-        catalog. assignImage(productId, "images/picture.jpeg");
+        catalog.assignImage(productId, "images/picture.jpeg");
 
         Product loadedProduct = catalog.loadById(productId);
-        assertEquals("images/picture.jpeg", loadedProduct.getImage());
+        assertEquals("images/picture.jpeg", loadedProduct.getImageKey());
     }
     @Test
     void productCantBePublishedWithoutImageAndPrice() {
