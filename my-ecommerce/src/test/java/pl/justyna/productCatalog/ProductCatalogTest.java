@@ -29,7 +29,8 @@ public class ProductCatalogTest{
     }
 
     private ProductCatalog thereIsProductCatalog() {
-        return new ProductCatalog();
+        ProductStorage productStorage = new HashMapProductStorage();
+        return new ProductCatalog(productStorage);
     }
 
     @Test
@@ -73,7 +74,7 @@ public class ProductCatalogTest{
         catalog.assignImage(productId, "images/picture.jpeg");
 
         Product loadedProduct = catalog.loadById(productId);
-        assertEquals("images/picture.jpeg", loadedProduct.getImageKey());
+        assertEquals("images/picture.jpeg", loadedProduct.getImage());
     }
     @Test
     void productCantBePublishedWithoutImageAndPrice() {

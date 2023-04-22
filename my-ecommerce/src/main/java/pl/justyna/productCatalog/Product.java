@@ -8,10 +8,9 @@ public class Product {
     private final String uuid;
     private final String name;
     private final String description;
-    private String image;
+    private String imageKey;
     private BigDecimal price;
     private boolean online;
-    private String imageKey;
 
     public Product(UUID uuid, String name, String description) {
         this.uuid = uuid.toString();
@@ -27,10 +26,6 @@ public class Product {
         return price;
     }
 
-    public boolean isOnline(Product product) {
-        return online;
-    } //bylo static, tez zmienna wyzej
-
     public boolean getOnline(){
         return online;
     }
@@ -42,18 +37,15 @@ public class Product {
     }
 
     public String getImage() {
-        return image;
+        return imageKey;
+    }
+
+    public void setImage(String imageKey) {
+        this.imageKey = imageKey;
     }
 
     public void changePrice(BigDecimal newPrice) {
         price = newPrice;
     }
 
-    public void setImageKey(String imageKey) {
-        this.imageKey = imageKey;
-    }
-
-    public String getImageKey() {
-        return imageKey;
-    }
 }

@@ -17,11 +17,11 @@ public class ProductCatalog {
     //do testowania robimy fake symulator - beedziemy tak robic
     //mozna tez robic wersje demo - dziala na przykladzie
     //Technical
-    private HashMapProductStorage productStorage;
+    private ProductStorage productStorage;
 
-    public ProductCatalog(){
+    public ProductCatalog(ProductStorage productStorage){
 
-        this.productStorage = new HashMapProductStorage();
+        this.productStorage = productStorage;
     }
 
     public List<Product> allProducts() {
@@ -44,19 +44,19 @@ public class ProductCatalog {
     }
 
     public void changePrice(String productID, BigDecimal newPrice) {
-        Product loadedProduct = this.loadById(productID);
+        Product loadedProduct = loadById(productID);
         loadedProduct.changePrice(newPrice);
     }
 
     public void assignImage(String productId, String imageKey) {
         Product product = this.loadById(productId);
-        product.setImageKey(imageKey);
+        product.setImage(imageKey);
     }
 
     public void publishProduct(String productId) {
         Product product = loadById(productId);
 
-        if (product.getImageKey() == null) {
+        if (product.getImage() == null) {
             throw new ProductCantBePublishedException();
         }
 
