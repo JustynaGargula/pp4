@@ -7,6 +7,7 @@ import pl.justyna.productCatalog.HashMapProductStorage;
 import pl.justyna.productCatalog.ProductCatalog;
 import pl.justyna.productCatalog.ProductStorage;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +18,14 @@ public class Main {
         }
         @Bean
         ProductCatalog createMyProductCatalog() {
-            return new ProductCatalog(new HashMapProductStorage());
+
+        ProductCatalog catalog = new ProductCatalog(new HashMapProductStorage());
+        String product1 = catalog.addProduct("my nice ebook", "Nice");
+        catalog.changePrice(product1, BigDecimal.valueOf(10.10));
+        catalog.assignImage(product1, "cat/image.jpeg");
+        catalog.publishProduct(product1);
+
+            return catalog;
         }
 
 }

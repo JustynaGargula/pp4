@@ -48,4 +48,7 @@ public class Product {
         price = newPrice;
     }
 
+    public String getDescription() {
+        return description;
+    }
 }
