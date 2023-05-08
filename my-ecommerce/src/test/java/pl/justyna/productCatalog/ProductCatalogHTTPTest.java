@@ -20,15 +20,15 @@ public class ProductCatalogHTTPTest {
 
     @Test
     void itLoadsIndex(){
-        String url = String.format("https://localhost:%s", this.port);
+        String url = String.format("http://localhost:%s", this.port);
         ResponseEntity<String> resp = http.getForEntity(url, String.class);
         assert resp.getStatusCode().equals(HttpStatus.OK);                    //test funkcjonalny
     }
 
     @Test
     void itLoadsProducts(){
-        String url = String.format("https://localhost:%s", this.port);
-        ResponseEntity<Product[]> resp = http.getForEntity(url, Product[].class);
+        String url = String.format("http://localhost:%s", this.port);           ///api/products
+        ResponseEntity<String> resp = http.getForEntity(url, String.class);
         assert resp.getStatusCode().equals(HttpStatus.OK);
     }
 
