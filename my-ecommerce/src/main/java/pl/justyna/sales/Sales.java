@@ -10,8 +10,8 @@ public class Sales {
         Cart cart = loadForCustomer(customerId)
                 .orElse(Cart.emptyCart());              //dostarcza pusty koszyk
 
-        Product product = loadDetailsForProduct(productId)
-                .orElseThrow(() -> new NoSuchProductException);
+        ProductDetailsProvider product = loadDetailsForProduct(productId)
+                .orElseThrow(() -> new NoSuchProductException());
 
         cart.add(product);
         cartStorage.save(customerId, cart);
@@ -19,10 +19,11 @@ public class Sales {
 
     private Optional<ProductDetailsProvider> loadDetailsForProduct(String productId){
 
-        return productDetailsProvider;
+        return productDetailsProvider.load(productId);
     }
 
     private Optional<Cart> loadForCustomer(String customerId) {
+
         return cartStorage.load(customerId);
     }
 }

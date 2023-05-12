@@ -1,4 +1,4 @@
 package pl.justyna.sales;
 
-public class NoSuchProductException {
+public class NoSuchProductException extends IllegalStateException{
 }

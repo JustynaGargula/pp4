@@ -5,7 +5,7 @@ public class Cart {
         return new Cart();
     }
 
-    public void add(Product product) {
+    public void add(ProductDetailsProvider product) {
 
     }
 
