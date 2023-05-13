@@ -4,8 +4,8 @@ import java.util.Optional;
 
 public class Sales {
 
-    private CartStorage cartStorage;
-    private ProductDetailsProvider productDetailsProvider;
+    private CartStorage cartStorage = new CartStorage();
+    private ProductDetailsProvider productDetailsProvider = new ProductDetailsProvider();
     public void addToCart(String customerId, String productId) {
         Cart cart = loadForCustomer(customerId)
                 .orElse(Cart.emptyCart());              //dostarcza pusty koszyk
@@ -23,7 +23,7 @@ public class Sales {
     }
 
     private Optional<Cart> loadForCustomer(String customerId) {
-
-        return cartStorage.load(customerId);
+        Optional<Cart> loaded = cartStorage.load(customerId);
+        return loaded;
     }
 }

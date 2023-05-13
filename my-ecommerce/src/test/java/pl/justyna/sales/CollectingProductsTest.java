@@ -3,6 +3,8 @@ package pl.justyna.sales;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.UUID;
+
 public class CollectingProductsTest {
 
     CartStorage cartStorage;
@@ -25,21 +27,23 @@ public class CollectingProductsTest {
         assertCustomerCartContainsNProducts(customerId, 1);
     }
 
+
+
     private void assertCustomerCartContainsNProducts(String customerId, int productCount) {
         Cart customerCart = cartStorage.load(customerId).get();
         assert customerCart.itemsCount() == productCount;
     }
 
     private String thereIsProduct() {
-        return null;
+        return UUID.randomUUID().toString();
     }
 
-    private String thereIsCustomer(String name) {
-        return null;
+    private String thereIsCustomer(String customerID) {
+        return customerID;
     }
 
-    private String thereIsSalesModule() {
-        return null;
+    private Sales thereIsSalesModule() {
+        return new Sales();
     }
 
 }
