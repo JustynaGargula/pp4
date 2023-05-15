@@ -16,7 +16,7 @@ public class CartStorage {
     }
 
     public void save(String customerId, Cart cart) {
-        customerCart.clear();
+        customerCart.clear();                           //?
         customerCart.put(customerId, cart);
     }
 }

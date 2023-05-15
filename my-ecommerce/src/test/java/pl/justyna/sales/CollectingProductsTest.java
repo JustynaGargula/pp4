@@ -43,7 +43,7 @@ public class CollectingProductsTest {
     }
 
     private Sales thereIsSalesModule() {
-        return new Sales();
+        return new Sales(cartStorage, productDetailsProvider);
     }
 
 }

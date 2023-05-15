@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import pl.justyna.productCatalog.HashMapProductStorage;
 import pl.justyna.productCatalog.ProductCatalog;
 import pl.justyna.productCatalog.ProductStorage;
+import pl.justyna.sales.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -26,6 +27,12 @@ public class Main {
         catalog.publishProduct(product1);
 
             return catalog;
+        }
+
+
+        @Bean
+        Sales createSales() {
+        return new Sales (new CartStorage(), new ProductDetailsProvider());
         }
 
 }
