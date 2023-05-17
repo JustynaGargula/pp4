@@ -20,6 +20,7 @@ public class Sales {
 
         cart.add(product);
         cartStorage.save(customerId, cart);
+
     }
 
     private Optional<ProductDetailsProvider> loadDetailsForProduct(String productId){

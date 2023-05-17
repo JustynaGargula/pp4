@@ -10,21 +10,16 @@ const getProducts = () => {
         .then(response => response.json());
 }
 
-const getCurrentOffer = () =>{
-
+const addToCart = (productId) => {
+    return fetch(`/api/add-to-cart/${productId}`, {
+        method: "POST",
+        body: JSON.stringify({})
+    }).then(response => response.json())
 };
 
-const refreshOffer = async () => {
-    const offer = await getCurrentOffer();
-    const cart = document.querySelector('.cart');
-
-    cart.querySelector('.total').textContent = `${offer.total} PLN`;
-    cart.querySelector('.itemsCount').textContent = `${offer.itemsCount} items`;
-}
-
-const createHtmlFromString = (htmlAsString) => {
+const createHtmlFromString = (template) => {
     const tmpElem = document.createElement('div');
-    tmpElem.innerHTML = htmlAsString.trim();                      //trim bo nie moze miec spacji
+    tmpElem.innerHTML = template.trim();                      //trim bo nie moze miec spacji
     return tmpElem.firstChild;
 }
 const createHtmlComponent = (product) => {
@@ -41,25 +36,29 @@ const createHtmlComponent = (product) => {
             </button>
         </li>`
     ;
-
-
     return createHtmlFromString(template);
 }
 
+const getCurrentOffer = () =>{
+    return fetch("api/get-current-offer")
+        .then(response => response.json());
+}
+
+const refreshOffer = async () => {
+    console.log('I am going to refresh offer');
+    const offer = await getCurrentOffer();
+    const cart = document.querySelector('.cart');
+
+    cart.querySelector('.total').textContent = `${offer.total} PLN`;
+    cart.querySelector('.itemsCount').textContent = `${offer.itemsCount} items`;
+}
 
 
-
-const addToCart = (productId) => {
-    return fetch(`/api/add-to-cart/${productId}`, {
-        method: "POST"
-    });
-};
 const initializeAddToCartHandler = (htmlEl) => {
     const btn = htmlEl.querySelector('button.product__add-to-cart')
     btn.addEventListener('click', () => {
-
         addToCart(btn.getAttribute('data-product-id'))
-            .then(refreshOffer());
+            .then(refreshOffer)                                     //z nawiasami po refreshOffer podkreśla
     });
     return htmlEl;
 };

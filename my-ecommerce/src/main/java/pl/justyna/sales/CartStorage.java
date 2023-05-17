@@ -11,8 +11,12 @@ public class CartStorage {
     }
 
     public Optional<Cart> load(String customerId) {
-        return Optional.of(Optional.ofNullable(customerCart.get(customerId))
-                .orElse(Cart.emptyCart()));
+//        if(customerCart.get(customerId) != null){
+//            customerCart.get(customerId).printCart();
+//        }
+//
+        return (Optional.ofNullable(customerCart.get(customerId)) );
+                //.orElse(Cart.emptyCart()));       Optional.of
     }
 
     public void save(String customerId, Cart cart) {

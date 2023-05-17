@@ -13,6 +13,12 @@ public class Cart {
         products.add(product);
     }
 
+    public void printCart(){
+        for (int i = 0; i < products.size(); i++) {
+            System.out.println(products.get(i));
+        }
+    }
+
     public int itemsCount() {
 
         return products.size();

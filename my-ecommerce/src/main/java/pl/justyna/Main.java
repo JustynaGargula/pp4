@@ -32,6 +32,7 @@ public class Main {
 
         @Bean
         Sales createSales() {
+
         return new Sales (new CartStorage(), new ProductDetailsProvider());
         }
 
