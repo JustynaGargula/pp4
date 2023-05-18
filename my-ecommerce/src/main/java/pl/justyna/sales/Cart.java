@@ -15,7 +15,12 @@ public class Cart {
 
     public void printCart(){
         for (int i = 0; i < products.size(); i++) {
-            System.out.println(products.get(i));
+            ProductDetailsProvider product = products.get(i);
+            String prId = product.getProductId();
+
+            product.load(prId);
+
+            System.out.println(product.toString());
         }
     }
 
@@ -23,4 +28,5 @@ public class Cart {
 
         return products.size();
     }
+
 }

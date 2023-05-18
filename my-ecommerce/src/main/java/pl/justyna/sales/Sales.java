@@ -4,11 +4,12 @@ import java.util.Optional;
 
 public class Sales {
 
-    private CartStorage cartStorage = new CartStorage();
+    private CartStorage cartStorage= new CartStorage();
     private ProductDetailsProvider productDetailsProvider = new ProductDetailsProvider();
 
     public Sales(CartStorage cartStorage, ProductDetailsProvider productDetailsProvider) {
-
+        this.cartStorage = cartStorage;
+        this.productDetailsProvider = productDetailsProvider;
     }
 
     public void addToCart(String customerId, String productId) {

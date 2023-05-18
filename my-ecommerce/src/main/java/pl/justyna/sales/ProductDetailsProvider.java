@@ -24,6 +24,43 @@ public class ProductDetailsProvider {
         this.price = price;
     }
 
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    @Override
+    public String toString(){
+        return getProductId()+" "+getName()+" "+getDescription()+" "+getPrice();
+    }
+
     public Optional<ProductDetailsProvider> load(String productId) {
         return Optional.of(new ProductDetailsProvider(productId, "Lord of rings", "Get ready to join Frodo in amazing adventure.", BigDecimal.valueOf(29.99)));
     }

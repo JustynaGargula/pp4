@@ -14,7 +14,9 @@ const addToCart = (productId) => {
     return fetch(`/api/add-to-cart/${productId}`, {
         method: "POST",
         body: JSON.stringify({})
-    }).then(response => response.json())
+    }).then(response => {
+        return response.json();
+    })
 };
 
 const createHtmlFromString = (template) => {
