@@ -3,6 +3,7 @@ package pl.justyna.sales;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 public class CollectingProductsTest {
@@ -27,6 +28,22 @@ public class CollectingProductsTest {
         assertCustomerCartContainsNProducts(customerId, 1);
     }
 
+    @Test
+    void itCountsTotalCorrectly(){
+        Sales sales = thereIsSalesModule();
+        String customerId = thereIsCustomer("Justyna");
+        String productId = thereIsProduct();
+
+        for (int i = 0; i < 5; i++) {
+            sales.addToCart(customerId, productId);      //adding 5 Lord of Rings (default) books
+        }
+
+        Cart customerCart = cartStorage.load(customerId).get();
+        customerCart.printCart();
+        //System.out.println(customerCart.total());
+        assert customerCart.total() == BigDecimal.valueOf(29.99*4);
+
+    }
 
 
     private void assertCustomerCartContainsNProducts(String customerId, int productCount) {
