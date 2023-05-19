@@ -39,9 +39,8 @@ public class CollectingProductsTest {
         }
 
         Cart customerCart = cartStorage.load(customerId).get();
-        customerCart.printCart();
-        //System.out.println(customerCart.total());
-        assert customerCart.total() == BigDecimal.valueOf(29.99*4);
+
+        assert customerCart.total().equals(BigDecimal.valueOf(29.99*4));
 
     }
 

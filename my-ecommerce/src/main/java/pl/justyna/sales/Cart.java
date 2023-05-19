@@ -12,14 +12,35 @@ public class Cart {
     }
 
     public void add(ProductDetailsProvider product) {
-        if(products.containsKey(product)){
-            int currentAmount = products.get(product);
-            products.replace(product, currentAmount, currentAmount+1);
+        if (productAlreadyInCart(product)){
+            ProductDetailsProvider productInCart = theSameProduct(product);            //byl problem z roznymi obiektami produktu
+
+            int currentAmount = products.get(productInCart);
+            products.replace(productInCart, currentAmount, (currentAmount+1));
         }
         else{
             products.put(product, 1);
         }
 
+        //printCart();
+    }
+
+    private ProductDetailsProvider theSameProduct(ProductDetailsProvider product) {
+        for(ProductDetailsProvider productInCart: products.keySet()){
+            if(productInCart.getProductId() == product.getProductId()){
+                return productInCart;
+            }
+        }
+        return null;
+    }
+
+    private boolean productAlreadyInCart(ProductDetailsProvider product) {
+        for(ProductDetailsProvider productInCart: products.keySet()){
+            if(productInCart.getProductId() == product.getProductId()){
+                return true;
+            }
+        }
+        return false;
     }
 
     public int itemsCount() {
@@ -36,11 +57,9 @@ public class Cart {
 
         for(ProductDetailsProvider product: products.keySet()){
             BigDecimal amountOfItems = BigDecimal.valueOf(products.get(product));
-            //System.out.println(amountOfItems);
-            totalAmount.add( product.getPrice().multiply (amountOfItems) );
-
-            totalAmount.subtract( amountOfItems.divideToIntegralValue(BigDecimal.valueOf(5)).multiply(product.getPrice()) );          //co piaty produkt jest za darmo
-
+            BigDecimal valueToAdd = ( product.getPrice().multiply (amountOfItems) )
+                    .subtract(amountOfItems.divideToIntegralValue(BigDecimal.valueOf(5)).multiply(product.getPrice())); //co piaty produkt jest za darmo, wiec naliczamy rabaty
+            totalAmount = totalAmount.add( valueToAdd );
         }
         return totalAmount;
     }
