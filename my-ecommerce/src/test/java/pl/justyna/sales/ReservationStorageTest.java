@@ -2,11 +2,14 @@ package pl.justyna.sales;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
 
+@SpringBootTest
 public class ReservationStorageTest {
 
+    //@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     ReservationRepository repository;
 

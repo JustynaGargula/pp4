@@ -12,13 +12,15 @@ public class Reservation {
     private BigDecimal total;
     private String paymentId;
 
-    Reservation(){};
+    public Reservation() {}
 
     public Reservation(String reservationId, BigDecimal total, String paymentId) {
         this.reservationId = reservationId;
         this.total = total;
         this.paymentId = paymentId;
     }
+
+
 
     public String getId() {
         return reservationId;

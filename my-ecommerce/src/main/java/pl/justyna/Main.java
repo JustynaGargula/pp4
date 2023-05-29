@@ -5,13 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import pl.justyna.productCatalog.HashMapProductStorage;
 import pl.justyna.productCatalog.ProductCatalog;
-import pl.justyna.productCatalog.ProductStorage;
 import pl.justyna.sales.*;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
 @SpringBootApplication
 public class Main {
     public static void main(String[] args) {
