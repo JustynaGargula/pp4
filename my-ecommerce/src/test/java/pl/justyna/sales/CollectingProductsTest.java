@@ -9,12 +9,12 @@ import java.util.UUID;
 public class CollectingProductsTest {
 
     CartStorage cartStorage;
-    ProductDetailsProvider productDetailsProvider;
+    MyProductDetailsProvider myProductDetailsProvider;
 
     @BeforeEach
     void setUp() {
         cartStorage = new CartStorage();
-        productDetailsProvider = new ProductDetailsProvider();
+        myProductDetailsProvider = new MyProductDetailsProvider();
     }
 
     @Test
@@ -59,7 +59,7 @@ public class CollectingProductsTest {
     }
 
     private Sales thereIsSalesModule() {
-        return new Sales(cartStorage, productDetailsProvider);
+        return new Sales(cartStorage, myProductDetailsProvider);
     }
 
 }

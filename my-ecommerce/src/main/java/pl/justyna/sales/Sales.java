@@ -5,18 +5,18 @@ import java.util.Optional;
 public class Sales {
 
     private CartStorage cartStorage= new CartStorage();
-    private ProductDetailsProvider productDetailsProvider = new ProductDetailsProvider();
+    private MyProductDetailsProvider myProductDetailsProvider = new MyProductDetailsProvider();
 
-    public Sales(CartStorage cartStorage, ProductDetailsProvider productDetailsProvider) {
+    public Sales(CartStorage cartStorage, MyProductDetailsProvider productDetailsProvider) {
         this.cartStorage = cartStorage;
-        this.productDetailsProvider = productDetailsProvider;
+        this.myProductDetailsProvider = productDetailsProvider;
     }
 
     public void addToCart(String customerId, String productId) {
         Cart cart = loadForCustomer(customerId)
                 .orElse(Cart.emptyCart());              //dostarcza pusty koszyk
 
-        ProductDetailsProvider product = loadDetailsForProduct(productId)
+        MyProductDetailsProvider product = loadDetailsForProduct(productId)
                 .orElseThrow(() -> new NoSuchProductException());
 
         cart.add(product);
@@ -24,9 +24,9 @@ public class Sales {
 
     }
 
-    private Optional<ProductDetailsProvider> loadDetailsForProduct(String productId){
+    private Optional<MyProductDetailsProvider> loadDetailsForProduct(String productId){
 
-        return productDetailsProvider.load(productId);
+        return myProductDetailsProvider.load(productId);
     }
 
     private Optional<Cart> loadForCustomer(String customerId) {
@@ -37,4 +37,6 @@ public class Sales {
     public Offer getCurrentOffer(String currentCustomer) {
         return null;
     }
+
+    public ReservationData
 }

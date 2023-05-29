@@ -25,6 +25,8 @@ public class SalesController {
     }
 
     private String getCurrentCustomer() {
+
+        //return offerCalculator.calculate(this.cartStorage.load(currentCustomer);
         return "Justyna";
     }
 }
