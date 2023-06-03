@@ -20,6 +20,9 @@ public class Reservation {
         this.paymentId = paymentId;
     }
 
+    public static Reservation from(Offer offer) {
+        return null;
+    }
 
 
     public String getId() {

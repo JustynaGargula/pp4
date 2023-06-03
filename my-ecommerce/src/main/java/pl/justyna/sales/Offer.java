@@ -16,4 +16,8 @@ public class Offer {
     public BigDecimal getTotal() {
         return total;
     }
+
+    public Integer getItemsCount() {
+        return itemsCount;
+    }
 }

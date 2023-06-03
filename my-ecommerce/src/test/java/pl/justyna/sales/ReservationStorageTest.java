@@ -31,6 +31,15 @@ public class ReservationStorageTest {
 
     @Test
     void select(){
+        Reservation reservation = new Reservation(
+                "res-1234",
+                BigDecimal.valueOf(10.10),
+                "payu/12345"
+        );
+        repository.save(reservation);
 
+        Reservation loaded = repository
+                .findById("res-1234")
+                .get();
     }
 }

@@ -3,6 +3,10 @@ package pl.justyna.sales;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import pl.justyna.productCatalog.Product;
 import pl.justyna.productCatalog.ProductCatalog;
 
 import java.lang.reflect.AccessibleObject;
@@ -16,24 +20,27 @@ public class OfferAcceptanceHttpTest {
     ProductCatalog catalog;
 
     @Autowired
-    TesrRestTemplate http;
+    TestRestTemplate http;
     @Test
-    void itAllowsToAcceptTheOffer() { //akceptowanie koszyka czyli uz
+    void itAllowsToAcceptTheOffer() { //akceptowanie koszyka czyli zlozenie zamowienia?
 
+        String productId = thereIsExampleProduct();
 
-        http.postForEntity(String.format("/api/add-to-cart/%s", productId), null, Object.class);
-        http.postForEntity(String.format("/api/add-to-cart/%s", productId), null, Object.class);
+        http.postForEntity(String.format("/api/add-to-cart/%s", productId), null, String.class);
+        http.postForEntity(String.format("/api/add-to-cart/%s", productId), null, String.class);
 
         AcceptOfferRequest request = new  AcceptOfferRequest("Justyna", "justyna@email.com");
-        ResponceEntity<ReservationData> responce = http.postForEntity(String.format("/api/accept-offer"), request, ReservationData.class);
+        ResponseEntity<ReservationData> response = http.postForEntity(String.format("/api/accept-offer"), request, ReservationData.class);
 
-        assert();
+        assertEquals(response.getStatusCode(), HttpStatus.OK);
+        assertNotNull(response.getBody().getPaymentUrl());
     }
 
     private String thereIsExampleProduct() {
         return catalog.allPublishedProducts()
                 .stream()
                 .findFirst()
-                .map();
+                .map(Product::getID)
+                .get();
     }
 }

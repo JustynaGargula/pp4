@@ -61,7 +61,7 @@ public class MyProductDetailsProvider implements ProductDetailsProvider{   //zmi
         return getProductId()+" "+getName()+" "+getDescription()+" "+getPrice();
     }
 
-    public Optional<MyProductDetailsProvider> load(String productId) {
-        return Optional.of(new MyProductDetailsProvider(productId, "Lord of rings", "Get ready to join Frodo in amazing adventure.", BigDecimal.valueOf(29.99)));
+    public Optional<ProductDetails> load(String productId) {
+        return Optional.of(new ProductDetails(productId, "Lord of rings", BigDecimal.valueOf(29.99)));
     }
 }
