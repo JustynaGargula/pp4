@@ -1,5 +1,8 @@
 package pl.justyna.sales;
 
+import pl.justyna.payu.*;
+
+import java.util.Arrays;
 import java.util.Optional;
 
 public class Sales {
@@ -7,6 +10,7 @@ public class Sales {
     private CartStorage cartStorage= new CartStorage();
     private ProductDetailsProvider productDetailsProvider = new MyProductDetailsProvider();
     private ReservationRepository reservationStorage;
+    private PayU payU;
 
     public Sales(CartStorage cartStorage, ProductDetailsProvider productDetailsProvider) {
         this.cartStorage = cartStorage;
@@ -43,10 +47,22 @@ public class Sales {
 
         Offer offer = getCurrentOffer(customerId);
 
+        OrderCreateRequest orderCreateRequest = new OrderCreateRequest();
+        orderCreateRequest.setBuyer(
+                new Buyer()
+                       // .setEmail
+        );
+        orderCreateRequest.setProducts(Arrays.asList(
+                new Product()
+                        //.setName()
+        ));
+
+        OrderCreateResponse response = payU.handle(orderCreateRequest);
+        
         Reservation reservation = Reservation.from(offer);
 
         reservationStorage.save(reservation);
 
-        return null; //?
+        return new ReservationData(response.getRedirectUri());
     }
 }

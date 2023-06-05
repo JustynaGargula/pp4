@@ -13,7 +13,7 @@ public class ProductCatalogProductDetailsProvider implements ProductDetailsProvi
         this.productCatalog = productCatalog;
     }
 
-    //@Override
+    @Override
     public Optional<ProductDetails> load(String productId) {
         Product product = productCatalog.loadById(productId);
         if(product == null){
