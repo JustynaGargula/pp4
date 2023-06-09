@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PayUTest {
     @Test
-    public void creating(){
+    public void creatingNewOrder(){
         OrderCreateRequest request = thereIsOrderRequest();
         PayU payU = thereIsPayU();
 
@@ -31,9 +31,13 @@ public class PayUTest {
                 .setCurrencyCode("PLN")
                 .setTotalAmount("21000")
                 .setBuyer(new Buyer()
-                        //.setEmail()
+                        .setEmail("john.doe@example.com")
+                        .setPhone("654111654")
+                        .setFirstName("John")
+                        .setLastName("Doe")
+                        .setLanguage("pl")
                 )
-                ;//dokonczyc
+                ;
 
         //    notifyUrl": "https://your.eshop.com/notify",
 //            "customerIp": "127.0.0.1",

@@ -3,6 +3,7 @@ package pl.justyna;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import pl.justyna.productCatalog.HashMapProductStorage;
 import pl.justyna.productCatalog.Product;
 import pl.justyna.productCatalog.ProductCatalog;
@@ -29,7 +30,7 @@ public class Main {
     }
 
 
-    @Bean
+    @Bean @Primary
     Sales createSalesViaObject(ProductCatalog catalog) {
 
     return new Sales (

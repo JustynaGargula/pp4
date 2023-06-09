@@ -78,4 +78,8 @@ public class OrderCreateRequest {
     }
 
 
+    public OrderCreateRequest setProducts(List<Product> products) {
+        this.products = products;
+        return this;
+    }
 }

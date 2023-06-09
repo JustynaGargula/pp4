@@ -8,9 +8,9 @@ public class Offer {
 
 
 
-    public Offer(){
-        this.total = BigDecimal.ZERO;
-        this.itemsCount = 0;
+    public Offer(BigDecimal total, Integer itemsCount){
+        this.total = total;
+        this.itemsCount = itemsCount;
     }
 
     public BigDecimal getTotal() {

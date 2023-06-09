@@ -7,8 +7,8 @@ import java.util.Optional;
 
 public class Sales {
 
-    private CartStorage cartStorage= new CartStorage();
-    private ProductDetailsProvider productDetailsProvider = new MyProductDetailsProvider();
+    private CartStorage cartStorage;
+    private ProductDetailsProvider productDetailsProvider;
     private ReservationRepository reservationStorage;
     private PayU payU;
 
@@ -40,7 +40,10 @@ public class Sales {
     }
 
     public Offer getCurrentOffer(String currentCustomer) {
-        return new Offer();
+
+        Cart customerCart = loadForCustomer(currentCustomer)
+                .orElse(Cart.emptyCart());
+        return new Offer(customerCart.total(), customerCart.itemsCount());
     }
 
     public ReservationData acceptOffer(String customerId) {
