@@ -8,6 +8,6 @@ public class ReservationData {
     }
 
     public String getPaymentUrl() {
-        return null;
+        return url;
     }
 }

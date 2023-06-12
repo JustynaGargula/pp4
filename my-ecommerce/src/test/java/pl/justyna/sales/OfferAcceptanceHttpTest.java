@@ -23,15 +23,17 @@ public class OfferAcceptanceHttpTest {
     TestRestTemplate http;
     @Test
     void itAllowsToAcceptTheOffer() { //akceptowanie koszyka czyli zlozenie zamowienia?
-
+        System.out.println("Starting test");
         String productId = thereIsExampleProduct();
 
         http.postForEntity(String.format("/api/add-to-cart/%s", productId), null, String.class);
         http.postForEntity(String.format("/api/add-to-cart/%s", productId), null, String.class);
 
         AcceptOfferRequest request = new  AcceptOfferRequest("Justyna", "justyna@email.com");
-        ResponseEntity<ReservationData> response = http.postForEntity(String.format("/api/accept-offer"), request, ReservationData.class);
-
+        ResponseEntity<ReservationData> response = http.postForEntity(String.format("/api/offer"), request, ReservationData.class);
+        System.out.println("Test stage: 1");
+        System.out.println("Test stage: 2");
+        System.out.println("Test stage: 3");
         assertEquals(response.getStatusCode(), HttpStatus.OK);
         assertNotNull(response.getBody().getPaymentUrl());
     }
