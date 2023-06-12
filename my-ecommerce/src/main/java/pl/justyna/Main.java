@@ -21,10 +21,15 @@ public class Main {
     ProductCatalog createMyProductCatalog() {
 
     ProductCatalog catalog = new ProductCatalog(new HashMapProductStorage());
-    String product1 = catalog.addProduct("my nice ebook", "Nice");
+    String product1 = catalog.addProduct("My nice ebook", "Nice");
     catalog.changePrice(product1, BigDecimal.valueOf(10.10));
     catalog.assignImage(product1, "cat/image.jpeg");
     catalog.publishProduct(product1);
+
+    String product2 = catalog.addProduct("Very interesting ebook", "So interesting");
+    catalog.changePrice(product2, BigDecimal.valueOf(9.9));
+    catalog.assignImage(product2, "cat/image2.jpeg");
+    catalog.publishProduct(product2);
 
         return catalog;
     }

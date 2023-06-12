@@ -7,8 +7,9 @@ const foo = () => {console.log("hello world!!")};
 
 const getProducts = () => {
     return fetch("/api/products")
-        .then(response => response.json());
-}
+        .then(response => response.json())
+        .catch((error) => console.log(error))
+};
 
 const addToCart = (productId) => {
     return fetch(`/api/add-to-cart/${productId}`, {
@@ -26,7 +27,7 @@ const createHtmlFromString = (template) => {
 }
 const createHtmlComponent = (product) => {
     const template = `
-        <li class={"product"}>
+        <li class="product">
             <h4>${product.name}</h4>
             <img />
             <span>${product.price}</span>
@@ -42,14 +43,14 @@ const createHtmlComponent = (product) => {
 }
 
 const getCurrentOffer = () =>{
-    return fetch("api/get-current-offer")
+    return fetch("api/offer")
         .then(response => response.json());
 }
 
 const refreshOffer = async () => {
     console.log('I am going to refresh offer');
     const offer = await getCurrentOffer();
-    const cart = document.querySelector('.cart');
+    const cart = document.querySelector('.offer');
 
     cart.querySelector('.total').textContent = `${offer.total} PLN`;
     cart.querySelector('.itemsCount').textContent = `${offer.itemsCount} items`;

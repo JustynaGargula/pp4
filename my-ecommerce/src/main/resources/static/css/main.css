@@ -1,3 +1,11 @@
 body {
-    color: green
+    margin: 2% 10%;  /* top right bottom left */
+    background-image: linear-gradient(to bottom right, rgb(106 106 189), rgb(142 142 181), rgb(173 216 230),rgb(255 255 255), transparent);
+    background-color: lightblue;  /* gdyby griadient nie byl w przegladarce wspierany */
+}
+
+h1{
+    color: green;
+    background: rgb(240, 248, 255, 0.5);
+    border-radius: 8px;
 }
